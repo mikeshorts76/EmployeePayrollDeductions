@@ -3,12 +3,9 @@
 		<h2>New Employee</h2>	
 		<div class="form-horizontal">       
         <hr />        
-        <div class="form-group">
-            <!-- @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" }) -->
+        <div class="form-group">            
 			<label></label>
-            <div class="col-md-4">
-                <!-- @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" }) -->
+            <div class="col-md-4">                
 				<label>First Name</label>
 				<input class="form-control" type="text"/>
             </div>
