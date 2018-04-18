@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -41,13 +42,22 @@ namespace EmployeePayrollDeductions.Web.Controllers.Api
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(EmployeeViewModel employee)
+        public async Task<IActionResult> Create([FromBody]EmployeeViewModel employee)
         {
             var employeeMapped = Mapper.Map<EmployeeViewModel, Employee>(employee);
 
-            await _employeeService.Create(employeeMapped);
+            try
+            {
+                await _employeeService.Create(employeeMapped);
 
-            return Created("", employee);
+                return Created("", employee);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+            
         }
     }
 }

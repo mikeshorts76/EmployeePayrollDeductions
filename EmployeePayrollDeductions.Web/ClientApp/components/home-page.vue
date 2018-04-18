@@ -1,23 +1,28 @@
 ﻿<template>
 	<div>	
 		<h2>Employees</h2>
-		<div>
-			<!-- <a href="#">+ Add New Employee</a> -->
+		<div>			
 			<router-link v-bind:to="'new-employee'">+ Add New Employee</router-link>
 		</div>
 		<br>
 		<table class="table table-condensed table-hover">			
 			<thead>
 				<tr>					
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Dependents Count</th>					
+					<th class="col-sm-3">First Name</th>
+					<th class="col-sm-3">Last Name</th>					
+					<th class="col-sm-2">Dependents Count</th>					
+					<th class="col-sm-2"></th>
+					<th class="col-sm-2"></th>
 				</tr>
 			</thead>			
 			<tbody v-for="employee in employees">
 				<tr>
-					<td> {{ employee.firstName }}</td>
+					<td>{{ employee.firstName }}</td>
 					<td>{{ employee.lastName }}</td>
+					<td>{{ employee.dependents.length }}</td>
+					<td>
+						<router-link v-bind:to="'new-dependent'">+ Add Dependent</router-link>
+					</td>
 					<td>
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Calculate Benefit Costs</button>
 					</td>
@@ -43,12 +48,19 @@
 	</div>
 </template>
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
     data() {
         return {
 			employees: null
         }
 	},
+	// computed: {
+	// 	...mapState({
+  	// 		employees: state => state.employees
+  	// 	})
+  	// },
 	methods: {
 		toggleModal: function() {
 			alert('toggled');
@@ -57,9 +69,10 @@ export default {
 	},
 
 	created() {
+		// this.getEmployees();
 		try {
 			this.$http.get('/api/employee')
-			.then(r => r.data)
+			.then(r => r.data)	
 				.then(employees => {
 					this.employees = employees;
 			})

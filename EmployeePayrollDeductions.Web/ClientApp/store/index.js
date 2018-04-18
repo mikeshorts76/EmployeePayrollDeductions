@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 // TYPES
 const MAIN_SET_COUNTER = 'MAIN_SET_COUNTER';
-const EMPLOYEES = 'EMPLOYEES';
+const SET_EMPLOYEES = 'EMPLOYEES';
 
 // STATE
 const state = {
@@ -15,13 +15,13 @@ const state = {
 
 // MUTATIONS
 const mutations = {
-    [MAIN_SET_COUNTER](state, obj) {
+    [MAIN_SET_COUNTER](state, obj) {	
         state.counter = obj.counter
 	},
 	
-	// [SET_EMPLOYEES] (state, employees) {
-	// 	state.employees = employees;
-	// },
+	[SET_EMPLOYEES] (state, employees) {
+		state.employees = employees;
+	}
 }
 
 // ACTIONS
@@ -32,9 +32,9 @@ const actions = ({
 	getEmployees ({ commit }) {
 		axios
 			.get('/api/employee')
-			.then(r => r.data)
-		  	.then(employees => {
-				commit('SET_EMPLOYEES', employees)
+				.then(r => r.data)
+		  			.then(employees => {
+						commit('SET_EMPLOYEES', employees)
 		  })
 	  },
 })

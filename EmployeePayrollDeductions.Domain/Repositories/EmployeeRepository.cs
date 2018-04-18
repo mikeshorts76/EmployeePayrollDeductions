@@ -19,7 +19,16 @@ namespace EmployeePayrollDeductions.Domain.Repositories
 
         public async Task Create(Employee item)
         {
+            var lastRecord = await _context.Employees.LastOrDefaultAsync();
+            var newId = lastRecord.EmployeeId + 1;
+
+            item.EmployeeId = newId;
+
             await _context.Employees.AddAsync(item);
+
+            _context.SaveChanges();
+
+            var employees = _context.Employees;
         }
 
         public Task Delete(int id)
