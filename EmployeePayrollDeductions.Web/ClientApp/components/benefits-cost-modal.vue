@@ -25,9 +25,7 @@
 		</div>
 	</div>
 </template>
-<script>
-	import { mapActions, mapState } from 'vuex';
-
+<script>	
 	export default {
 		data() {
 			return {
@@ -43,7 +41,4 @@
 	};
 </script>
 <style>
-	.header-background {
-		background-color: #eee;
-	}
 </style>

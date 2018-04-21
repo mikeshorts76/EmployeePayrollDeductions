@@ -16,7 +16,7 @@ namespace EmployeePayrollDeductions.Domain.Repositories
             _context = context;
         }
 
-        public async Task Create(Dependent item)
+        public async Task<int> Create(Dependent item)
         {
             var lastRecord = await _context.Dependents.LastOrDefaultAsync();
             var newId = lastRecord.DependentId + 1;
@@ -26,6 +26,8 @@ namespace EmployeePayrollDeductions.Domain.Repositories
             await _context.Dependents.AddAsync(item);
 
             await _context.SaveChangesAsync();
+
+            return newId;
         }
 
         public Task Delete(int id)

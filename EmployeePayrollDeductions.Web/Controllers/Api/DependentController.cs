@@ -26,9 +26,9 @@ namespace EmployeePayrollDeductions.Web.Controllers.Api
             {
                 var dependentMapped = Mapper.Map<DependentViewModel, Dependent>(dependent);
 
-                await _dependentService.Create(dependentMapped);
+                var id = await _dependentService.Create(dependentMapped);
 
-                return Created("", dependent);
+                return Created(new Uri($"{Request.Path}/{id}", UriKind.Relative), dependent);
             }
             catch (Exception ex)
             {

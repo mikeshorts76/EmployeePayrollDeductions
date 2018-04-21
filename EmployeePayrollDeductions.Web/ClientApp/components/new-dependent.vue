@@ -1,4 +1,3 @@
-
 <template>
 	<div>
 		<h2>New Dependent</h2>	
@@ -7,7 +6,9 @@
 		<p v-if="errors.length">
 			<b>Please correct the following error(s):</b>
 			<ul>
-				<li class="validation-error" v-for="error in errors">{{ error }}</li>
+				<li class="validation-error" v-for="error in errors" :key="error.id">
+					{{ error.message }}
+				</li>
 			</ul>
 		</p>    
         <div class="form-group">            
@@ -87,10 +88,10 @@ export default {
 			this.errors = [];
 
 			if (!this.dependent.firstName)
-				this.errors.push('First Name is Required');
+				this.errors.push({ id: 1, message: 'First Name is Required' });
 
 			if (!this.dependent.lastName)
-				this.errors.push('Last Name is Required');	
+				this.errors.push({ id: 2, message: 'Last Name is Required' });
 				
 			return false;
 		}

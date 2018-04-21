@@ -17,7 +17,7 @@ namespace EmployeePayrollDeductions.Domain.Repositories
             _context = context;
         }
 
-        public async Task Create(Employee item)
+        public async Task<int> Create(Employee item)
         {
             //mocking some of what a normal sql db would do
             var lastRecord = await _context.Employees.LastOrDefaultAsync();
@@ -30,6 +30,8 @@ namespace EmployeePayrollDeductions.Domain.Repositories
             _context.SaveChanges();
 
             var employees = _context.Employees;
+
+            return newId;
         }
 
         public Task Delete(int id)

@@ -17,24 +17,18 @@
 			</thead>			
 			<tbody v-for="employee in employees" :key="employee.employeeId">
 				<tr>
-					<td>{{ employee.firstName }}</td>
-					<td>{{ employee.lastName }}</td>
-					<td>{{ employee.dependents.length }}</td>
-					<td>						
+					<td class="col-sm-3">{{ employee.firstName }}</td>
+					<td class="col-sm-3">{{ employee.lastName }}</td>
+					<td class="col-sm-2">{{ employee.dependents.length }}</td>
+					<td class="col-sm-2">						
 						<a href="#" v-on:click="addNewDependent(employee)">+ Add Dependent</a>
 					</td>
-					<td>
+					<td class="col-sm-2">
 						<button type="button" class="btn btn-primary" v-on:click="showModal(employee)">Calculate Benefit Costs</button>
 					</td>
 				</tr>
 			</tbody>			
-		</table>		  
-		<!-- <button type="button" class="btn btn-info btn-lg" v-on:click="showModal">Open Modal</button>    -->
-		<!-- <modal name="benefits-cost">
-  			<div>
-
-			</div>
-		</modal> -->
+		</table>		  		
 		<modals-container/>
 	</div>
 </template>
@@ -69,12 +63,12 @@ export default {
 		showModal: function(selectedEmployee) {
 			this.$modal.show(BenefitsCostModal, {
 				employee: selectedEmployee
-				}, 
-				{
-					draggable: true
-				},
-				)
-		}		
+			}, 
+			{
+				draggable: true
+			},
+			
+			)}		
 	},
 
 	created() {		
@@ -90,6 +84,5 @@ export default {
 	}
 }
 </script>
-
 <style>
 </style>

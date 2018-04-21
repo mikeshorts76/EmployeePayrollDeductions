@@ -16,9 +16,11 @@ namespace EmployeePayrollDeductions.Domain.Services
             _dependentRepository = dependentRepository;
         }
 
-        public async Task Create(Dependent dependent)
+        public async Task<int> Create(Dependent dependent)
         {
-            await _dependentRepository.Create(dependent);            
+            var id = await _dependentRepository.Create(dependent);
+
+            return id;
         }
 
         public Task Delete(int id)

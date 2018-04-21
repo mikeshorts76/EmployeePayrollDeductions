@@ -7,7 +7,7 @@ namespace EmployeePayrollDeductions.Domain.Interfaces
     {
         Task<List<T>> GetAll();
         Task<T> Get(int id);
-        Task Create(T item);
+        Task<int> Create(T item);
         Task Update(T item);
         Task Delete(int id);
     }

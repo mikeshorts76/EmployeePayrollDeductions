@@ -4,9 +4,6 @@ using EmployeePayrollDeductions.Domain.Services;
 using EmployeePayrollDeductions.Web.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoMapper;
 using EmployeePayrollDeductions.Web;
 using System.Threading.Tasks;
@@ -19,14 +16,18 @@ namespace EmployeePayrollDeductions.Tests
         private Mock<IRepository<Employee>> _employeeRepositoryMock;
         private EmployeeService _employeeService;
         private Employee _employee;
+        
+        [ClassInitialize]
+        public static void Initialize(TestContext testContext)
+        {
+            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
+        }
 
         [TestInitialize]
         public void Initialize()
         {
             _employeeRepositoryMock = new Mock<IRepository<Employee>>();
-            _employeeService = new EmployeeService(_employeeRepositoryMock.Object);
-
-            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());            
+            _employeeService = new EmployeeService(_employeeRepositoryMock.Object);            
         }
 
 
