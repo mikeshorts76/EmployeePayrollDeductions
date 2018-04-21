@@ -4,39 +4,25 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // TYPES
-const MAIN_SET_COUNTER = 'MAIN_SET_COUNTER';
-const SET_EMPLOYEES = 'EMPLOYEES';
+const SET_CURRENT_EMPLOYEE = 'SET_CURRENT_EMPLOYEE';
 
 // STATE
-const state = {
-	counter: 0,
-	employees: null
+const state = {	
+	currentEmployee: null
 }
 
 // MUTATIONS
 const mutations = {
-    [MAIN_SET_COUNTER](state, obj) {	
-        state.counter = obj.counter
-	},
-	
-	[SET_EMPLOYEES] (state, employees) {
-		state.employees = employees;
+	[SET_CURRENT_EMPLOYEE] (state, obj) {
+		state.currentEmployee = obj;
 	}
 }
 
 // ACTIONS
-const actions = ({
-    setCounter({ commit }, obj) {
-        commit(MAIN_SET_COUNTER, obj)
-	},
-	getEmployees ({ commit }) {
-		axios
-			.get('/api/employee')
-				.then(r => r.data)
-		  			.then(employees => {
-						commit('SET_EMPLOYEES', employees)
-		  })
-	  },
+const actions = ({    
+	setCurrentEmployee({ commit }, obj) {
+        commit(SET_CURRENT_EMPLOYEE, obj)
+	}	
 })
 
 export default new Vuex.Store({

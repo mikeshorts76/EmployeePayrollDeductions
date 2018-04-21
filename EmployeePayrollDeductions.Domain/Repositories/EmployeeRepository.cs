@@ -19,6 +19,7 @@ namespace EmployeePayrollDeductions.Domain.Repositories
 
         public async Task Create(Employee item)
         {
+            //mocking some of what a normal sql db would do
             var lastRecord = await _context.Employees.LastOrDefaultAsync();
             var newId = lastRecord.EmployeeId + 1;
 

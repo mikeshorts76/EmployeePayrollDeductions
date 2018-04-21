@@ -1,8 +1,8 @@
 ﻿<template>
-	<div>	
+	<div>			
 		<h2>Employees</h2>
 		<div>			
-			<router-link v-bind:to="'new-employee'">+ Add New Employee</router-link>
+			<router-link v-bind:to="'new-employee'">+ Add New Employee</router-link>			
 		</div>
 		<br>
 		<table class="table table-condensed table-hover">			
@@ -15,61 +15,69 @@
 					<th class="col-sm-2"></th>
 				</tr>
 			</thead>			
-			<tbody v-for="employee in employees">
+			<tbody v-for="employee in employees" :key="employee.employeeId">
 				<tr>
 					<td>{{ employee.firstName }}</td>
 					<td>{{ employee.lastName }}</td>
 					<td>{{ employee.dependents.length }}</td>
-					<td>
-						<router-link v-bind:to="'new-dependent'">+ Add Dependent</router-link>
+					<td>						
+						<a href="#" v-on:click="addNewDependent(employee)">+ Add Dependent</a>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Calculate Benefit Costs</button>
+						<button type="button" class="btn btn-primary" v-on:click="showModal(employee)">Calculate Benefit Costs</button>
 					</td>
 				</tr>
 			</tbody>			
-		</table>
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog modal-md">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
-					</div>
-					<div class="modal-body">
-						<p>This is a small modal.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
+		</table>		  
+		<!-- <button type="button" class="btn btn-info btn-lg" v-on:click="showModal">Open Modal</button>    -->
+		<!-- <modal name="benefits-cost">
+  			<div>
+
 			</div>
-		</div>
+		</modal> -->
+		<modals-container/>
 	</div>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex';	
+import router from 'router';
+import BenefitsCostModal from 'components/benefits-cost-modal.vue';
 
-export default {
+export default {	
     data() {
         return {
-			employees: null
+			employees: null,	
+			selectedEmployee: null				
         }
 	},
-	// computed: {
-	// 	...mapState({
-  	// 		employees: state => state.employees
-  	// 	})
-  	// },
+	computed: {
+		...mapState({
+  			currentEmployee: state => state.currentEmployee
+  		})
+  	},
 	methods: {
+		...mapActions(['setCurrentEmployee']),
 		toggleModal: function() {
 			alert('toggled');
-		}
-
+		},
+		addNewDependent: function(employee) {
+			//add current employee to state management
+			this.selectedEmployee = employee;
+			this.setCurrentEmployee( {currentEmployee: this.selectedEmployee })
+			router.push('/new-dependent');
+		},
+		showModal: function(selectedEmployee) {
+			this.$modal.show(BenefitsCostModal, {
+				employee: selectedEmployee
+				}, 
+				{
+					draggable: true
+				},
+				)
+		}		
 	},
 
-	created() {
-		// this.getEmployees();
+	created() {		
 		try {
 			this.$http.get('/api/employee')
 			.then(r => r.data)	

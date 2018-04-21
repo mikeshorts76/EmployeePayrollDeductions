@@ -1,6 +1,9 @@
+using AutoMapper;
 using EmployeePayrollDeductions.Domain.Interfaces;
+using EmployeePayrollDeductions.Domain.Models;
 using EmployeePayrollDeductions.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace EmployeePayrollDeductions.Web.Controllers.Api
@@ -17,9 +20,20 @@ namespace EmployeePayrollDeductions.Web.Controllers.Api
         }
 
         [HttpPost]        
-        public async Task<IActionResult> Create(DependentViewModel dependent)
-        {
-            return Ok();
+        public async Task<IActionResult> Create([FromBody]DependentViewModel dependent)
+        {            
+            try
+            {
+                var dependentMapped = Mapper.Map<DependentViewModel, Dependent>(dependent);
+
+                await _dependentService.Create(dependentMapped);
+
+                return Created("", dependent);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }                        
         }
     }
 }

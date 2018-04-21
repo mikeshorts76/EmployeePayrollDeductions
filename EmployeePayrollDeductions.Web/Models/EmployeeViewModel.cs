@@ -30,6 +30,7 @@ namespace EmployeePayrollDeductions.Web.Models
                 return Dependents.Sum(x => x.BenefitCost) + BenefitCost;
             }
         }
+        
         public List<DependentViewModel> Dependents { get; set; }
 
         public EmployeeViewModel()

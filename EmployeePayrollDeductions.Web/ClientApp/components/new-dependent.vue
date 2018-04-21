@@ -3,7 +3,13 @@
 	<div>
 		<h2>New Dependent</h2>	
 		<div class="form-horizontal">       
-        <hr />        
+        <hr />    
+		<p v-if="errors.length">
+			<b>Please correct the following error(s):</b>
+			<ul>
+				<li class="validation-error" v-for="error in errors">{{ error }}</li>
+			</ul>
+		</p>    
         <div class="form-group">            
 			<label></label>
             <div class="col-md-4">                
@@ -34,33 +40,63 @@
 </template>
 <script>
 import router from 'router'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     data() {
-        return {
-			dependent: {
+        return {				
+			dependent: {	
+				employeeId: null,			
 				firstName: null,
 				lastName: null
 			},
-			isFirstDependent: true
+			isFirstDependent: true,
+			errors: []
         }
 	},
+	computed: {
+  		...mapState({
+  			employee: state => state.currentEmployee
+  		})
+  	},
 	methods: {
-		insertDependent: function() {
-			this.isFirstDependent = false;
+		insertDependent: function() {				
+			if (this.isValid()) {
+				this.isFirstDependent = false;
+				this.errors = [];
+
+				try {
+					this.dependent.employeeId = this.employee.currentEmployee.employeeId;
+
+					this.$http.post('/api/dependent', this.dependent)
+						.then(function(response){
+							// router.push('/');
+						})
+						.catch(function(error) {
+							console.log(error);
+						})
+				} catch (error) {	
+					console.log(error);
+				}
+			}			
+		},
+		isValid: function(e) {
+			if (this.dependent.firstName && this.dependent.lastName) 
+				return true;
 			
-			// try {
-			// 		this.$http.post('/api/dependent', this.dependent)
-			// 			.then(function(response){
-			// 				router.push('/');
-			// 			})
-			// 			.catch(function(error) {
-			// 				console.log(error);
-			// 			})
-			// } catch (error) {	
-			// 	console.log(error);
-			// }
+			this.errors = [];
+
+			if (!this.dependent.firstName)
+				this.errors.push('First Name is Required');
+
+			if (!this.dependent.lastName)
+				this.errors.push('Last Name is Required');	
+				
+			return false;
 		}
+	},
+	created() {
+		
 	}
 }
 </script>
