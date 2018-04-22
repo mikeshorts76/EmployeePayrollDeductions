@@ -12,10 +12,20 @@ namespace EmployeePayrollDeductions.Web.Models
         {
             get
             {
-                if (FirstName.StartsWith("A", true, CultureInfo.InvariantCulture))
+                if (IsDiscount)
                     return 500M - ((10M / 100M) * 500M);
                 else
                     return 500M;
+            }
+        }
+        public bool IsDiscount
+        {
+            get
+            {
+                if (FirstName.StartsWith("A", true, CultureInfo.InvariantCulture))
+                    return true;
+                else
+                    return false;
             }
         }
     }

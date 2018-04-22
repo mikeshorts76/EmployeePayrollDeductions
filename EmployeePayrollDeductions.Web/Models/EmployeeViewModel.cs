@@ -17,7 +17,7 @@ namespace EmployeePayrollDeductions.Web.Models
         {
             get
             {
-                if (FirstName.StartsWith("A", true, CultureInfo.InvariantCulture))
+                if (IsDiscount)
                     return 1000M - ((10M / 100M) * 1000M);
                 else
                     return 1000M;
@@ -32,6 +32,17 @@ namespace EmployeePayrollDeductions.Web.Models
         }
         
         public List<DependentViewModel> Dependents { get; set; }
+        public bool Visible { get; set; }
+        public bool IsDiscount
+        {
+            get
+            {
+                if (FirstName.StartsWith("A", true, CultureInfo.InvariantCulture))
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         public EmployeeViewModel()
         {

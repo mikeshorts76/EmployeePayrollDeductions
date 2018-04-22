@@ -1,28 +1,40 @@
 <template>
 	<div class="container">
 		<span class="header-background">
-			<h1>Employee Benefits Cost</h1>
-		</span>		
-		<hr>
-		<div>		
-			<h3>
-				Annual Salary: ${{ employee.pay.toFixed(2) }} 
-			</h3>	
-		</div>
-		<div>		
-			<h3>
-				Total Benefits Cost: ${{ employee.totalBenefitCost.toFixed(2) }}
-			</h3>	
-		</div>
-		<div>		
-			<h3>
-				Salary After Benefits: ${{ salaryAfterBenefits }}
-			</h3>	
-		</div>
+			<h2>Employee Benefits Cost</h2>
+		</span>	
+		<hr>	
+		<div class="header-footer">
+			<span>Employee Cost</span>
+			<span class="bold" v-if="employee.isDiscount">(10% Discount)</span>	
+			<span> = ${{ employee.benefitCost.toFixed(2) }}</span>			
+		</div>		
 		<br>
-		<div class="col-md-offset-5">
-			<button class="btn btn-primary" v-on:click="close">Close</button>
-		</div>
+		<table>
+			<thead v-if="employee.dependents.length" class="header-footer">
+				<tr>
+					<th class="col-sm-3">Dependent</th>
+					<th class="col-sm-3">Cost</th>					
+				</tr>
+			</thead>
+			<tfoot class="header-footer">
+				<tr>
+					<td class="col-sm-3">Total</td>					
+					<td class="col-sm-3">${{ employee.totalBenefitCost.toFixed(2) }}</td>
+				</tr>
+			</tfoot>
+			<tbody v-for="dependent in employee.dependents" :key="dependent.dependentId">
+				<tr>
+					<td class="col-sm-3">
+						<span>{{ dependent.firstName + ' ' + dependent.lastName }}</span>						
+						<span class="bold" v-if="dependent.isDiscount">(10% Discount)</span>						
+					</td>
+					<td class="col-sm-3">
+						<span>${{ dependent.benefitCost.toFixed(2) }}</span>						
+					</td>
+				</tr>
+			</tbody>		
+		</table>		
 	</div>
 </template>
 <script>	
@@ -41,4 +53,12 @@
 	};
 </script>
 <style>
+	.header-footer {
+		font-size: large;
+		font-weight: bold;
+	}
+	.bold {
+		font-weight: bold;
+		color:green
+	}
 </style>

@@ -42,6 +42,8 @@
 <script>
 import router from 'router'
 import { mapActions, mapState } from 'vuex'
+import 'vue-toast/dist/vue-toast.min.css'
+import VueToast from 'vue-toast'
 
 export default {
     data() {
@@ -61,25 +63,33 @@ export default {
   		})
   	},
 	methods: {
-		insertDependent: function() {				
+		insertDependent: function() {							
+			var self = this;
+
 			if (this.isValid()) {
 				this.isFirstDependent = false;
 				this.errors = [];
 
 				try {
-					this.dependent.employeeId = this.employee.currentEmployee.employeeId;
 
-					this.$http.post('/api/dependent', this.dependent)
-						.then(function(response){
-							// router.push('/');
-						})
-						.catch(function(error) {
-							console.log(error);
-						})
+					this.dependent.employeeId = this.employee.currentEmployee.employeeId;
+					
+					this.$http.post('/api/dependent', this.dependent)						
+						.then(function(response){												
+							self.showToast('Dependent added successfully', 'success');							
+						})						
 				} catch (error) {	
-					console.log(error);
+					self.showToast(error, 'error');				
 				}
 			}			
+		},		
+		showToast: function(message, type) {
+			this.$toasted.show(message, {
+				position: 'bottom-center',
+				type: type,
+				duration: 5000,
+				theme: 'outline'				
+			})		
 		},
 		isValid: function(e) {
 			if (this.dependent.firstName && this.dependent.lastName) 
