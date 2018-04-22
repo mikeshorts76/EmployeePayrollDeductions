@@ -26,11 +26,11 @@
 			<tbody v-for="dependent in employee.dependents" :key="dependent.dependentId">
 				<tr>
 					<td class="col-sm-3">
-						<span>{{ dependent.firstName + ' ' + dependent.lastName }}</span>						
+						<span class="cell-padding">{{ dependent.firstName + ' ' + dependent.lastName }}</span>						
 						<span class="bold" v-if="dependent.isDiscount">(10% Discount)</span>						
 					</td>
 					<td class="col-sm-3">
-						<span>${{ dependent.benefitCost.toFixed(2) }}</span>						
+						<span class="cell-padding">${{ dependent.benefitCost.toFixed(2) }}</span>						
 					</td>
 				</tr>
 			</tbody>		
@@ -60,5 +60,8 @@
 	.bold {
 		font-weight: bold;
 		color:green
+	}
+	.cell-padding {
+		padding-left: 15px;
 	}
 </style>
