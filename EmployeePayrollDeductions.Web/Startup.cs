@@ -125,15 +125,15 @@ namespace EmployeePayrollDeductions.Web
                 var dependent3 = new Dependent
                 {
                     DependentId = 3,
-                    //EmployeeId = 1,
-                    FirstName = "Dan",
+                    EmployeeId = 2,
+                    FirstName = "Adam",
                     LastName = "Doe"
                 };
 
                 var dependent4 = new Dependent
                 {
                     DependentId = 4,
-                    //EmployeeId = 1,
+                    EmployeeId = 2,
                     FirstName = "Kevin",
                     LastName = "Doe"
                 };
@@ -144,8 +144,8 @@ namespace EmployeePayrollDeductions.Web
                     LastName = "Doe",
                     EmployeeId = 2
                 };
-                employee1.Dependents.Add(dependent3);
-                employee1.Dependents.Add(dependent4);
+                employee2.Dependents.Add(dependent3);
+                employee2.Dependents.Add(dependent4);
                 //context.Dependents.Add(dependent);
                 //context.Dependents.Add(dependent2);
 

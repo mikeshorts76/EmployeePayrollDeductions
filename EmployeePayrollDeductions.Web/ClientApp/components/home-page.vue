@@ -95,11 +95,11 @@ export default {
 		showModal: function(selectedEmployee) {
 			this.$modal.show(BenefitsCostModal, {
 				employee: selectedEmployee
-		}, 
-		{
-			draggable: true
-		},
-		
+			}, 
+			{
+			draggable: true,
+			height: 500
+			},			
 		)}
 	},
 
