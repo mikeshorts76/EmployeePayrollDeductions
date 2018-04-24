@@ -57,11 +57,8 @@ export default {
 				try {
 					this.$http.post('/api/employee', this.employee)
 						.then(function(response){
-							router.push('/');
-						})
-						.catch(function(error) {
-							console.log(error);
-						})
+							router.push('/')
+						})						
 				} catch (error) {	
 					console.log(error);
 				}
@@ -69,17 +66,17 @@ export default {
 		},
 		isValid: function(e) {
 			if (this.employee.firstName && this.employee.lastName) 
-				return true;
+				return true
 			
-			this.errors = [];
+			this.errors = []
 
 			if (!this.employee.firstName)
-				this.errors.push({ id: 1, message: 'First Name is Required'});
+				this.errors.push({ id: 1, message: 'First Name is Required'})
 
 			if (!this.employee.lastName)
-				this.errors.push({ id: 2, message: 'Last Name is Required'});
+				this.errors.push({ id: 2, message: 'Last Name is Required'})
 				
-			return false;
+			return false
 		}
 	}
 }

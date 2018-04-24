@@ -64,22 +64,22 @@ export default {
   	},
 	methods: {
 		insertDependent: function() {							
-			var self = this;
+			var self = this
 
 			if (this.isValid()) {
-				this.isFirstDependent = false;
-				this.errors = [];
+				this.isFirstDependent = false
+				this.errors = []
 
 				try {
 
-					this.dependent.employeeId = this.employee.currentEmployee.employeeId;
+					this.dependent.employeeId = this.employee.currentEmployee.employeeId
 					
 					this.$http.post('/api/dependent', this.dependent)						
 						.then(function(response){												
-							self.showToast('Dependent added successfully', 'success');							
+							self.showToast('Dependent added successfully', 'success')							
 						})						
 				} catch (error) {	
-					self.showToast(error, 'error');				
+					self.showToast(error, 'error')
 				}
 			}			
 		},		
@@ -93,21 +93,18 @@ export default {
 		},
 		isValid: function(e) {
 			if (this.dependent.firstName && this.dependent.lastName) 
-				return true;
+				return true
 			
-			this.errors = [];
+			this.errors = []
 
 			if (!this.dependent.firstName)
-				this.errors.push({ id: 1, message: 'First Name is Required' });
+				this.errors.push({ id: 1, message: 'First Name is Required' })
 
 			if (!this.dependent.lastName)
-				this.errors.push({ id: 2, message: 'Last Name is Required' });
+				this.errors.push({ id: 2, message: 'Last Name is Required' })
 				
-			return false;
+			return false
 		}
-	},
-	created() {
-		
 	}
 }
 </script>

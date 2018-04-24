@@ -57,7 +57,7 @@
 		props: ['employee'],  		
 		methods: {
 			close() {
-				this.$emit('close');
+				this.$emit('close')
 			},
 		}		  
 	};

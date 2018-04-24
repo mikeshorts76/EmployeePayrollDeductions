@@ -22,7 +22,7 @@
 import Vue from 'vue'
 import HomePage from './home-page'
 
-Vue.component('home-page', HomePage);
+Vue.component('home-page', HomePage)
 
 export default {
     data() {

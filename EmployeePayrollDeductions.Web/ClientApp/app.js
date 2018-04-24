@@ -7,7 +7,7 @@ import App from 'components/app-root'
 import VModal from 'vue-js-modal'
 import Toasted from 'vue-toasted'
 
-Vue.prototype.$http = axios;
+Vue.prototype.$http = axios
 
 Vue.use(VModal, { dialog: true, dynamic: true })
 Vue.use(Toasted)

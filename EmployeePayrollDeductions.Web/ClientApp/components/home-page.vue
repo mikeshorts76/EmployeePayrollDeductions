@@ -62,9 +62,9 @@
 	</div>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex';	
-import router from 'router';
-import BenefitsCostModal from 'components/benefits-cost-modal.vue';
+import { mapActions, mapState } from 'vuex'	
+import router from 'router'
+import BenefitsCostModal from 'components/benefits-cost-modal.vue'
 
 export default {	
     data() {
@@ -81,16 +81,16 @@ export default {
 	methods: {
 		...mapActions(['setCurrentEmployee']),
 		toggleModal: function() {
-			alert('toggled');
+			alert('toggled')
 		},
 		addNewDependent: function(employee) {
 			//add current employee to state management
-			this.selectedEmployee = employee;
+			this.selectedEmployee = employee
 			this.setCurrentEmployee( {currentEmployee: this.selectedEmployee })
-			router.push('/new-dependent');
+			router.push('/new-dependent')
 		},
 		toggleDependents: function(employee) {
-			employee.visible === false ? employee.visible = true : employee.visible = false;			
+			employee.visible === false ? employee.visible = true : employee.visible = false			
 		},
 		showModal: function(selectedEmployee) {
 			this.$modal.show(BenefitsCostModal, {
@@ -108,10 +108,10 @@ export default {
 			this.$http.get('/api/employee')
 			.then(r => r.data)	
 				.then(employees => {
-					this.employees = employees;
+					this.employees = employees
 			})
 		} catch (error) {	
-			console.log(error);
+			console.log(error)
 		}
 	}
 }

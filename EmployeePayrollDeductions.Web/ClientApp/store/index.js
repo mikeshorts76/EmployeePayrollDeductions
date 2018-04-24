@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // TYPES
-const SET_CURRENT_EMPLOYEE = 'SET_CURRENT_EMPLOYEE';
+const SET_CURRENT_EMPLOYEE = 'SET_CURRENT_EMPLOYEE'
 
 // STATE
 const state = {	
@@ -14,7 +14,7 @@ const state = {
 // MUTATIONS
 const mutations = {
 	[SET_CURRENT_EMPLOYEE] (state, obj) {
-		state.currentEmployee = obj;
+		state.currentEmployee = obj
 	}
 }
 
