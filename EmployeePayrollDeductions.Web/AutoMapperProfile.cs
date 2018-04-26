@@ -9,7 +9,7 @@ namespace EmployeePayrollDeductions.Web
         public AutoMapperProfile()
         {
             CreateMap<Dependent, DependentViewModel>().ReverseMap();
-            CreateMap<Employee, EmployeeViewModel>().ReverseMap();
+            CreateMap<Employee, EmployeeViewModel>().ReverseMap();            
         }
     }
 }

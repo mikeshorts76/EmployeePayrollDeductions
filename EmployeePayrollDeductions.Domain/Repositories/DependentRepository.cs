@@ -18,6 +18,7 @@ namespace EmployeePayrollDeductions.Domain.Repositories
 
         public async Task<int> Create(Dependent item)
         {
+            //this is mocking an auto-increment on the db
             var lastRecord = await _context.Dependents.LastOrDefaultAsync();
             var newId = lastRecord.DependentId + 1;
 

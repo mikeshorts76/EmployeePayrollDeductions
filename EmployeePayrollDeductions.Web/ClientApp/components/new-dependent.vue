@@ -71,7 +71,6 @@ export default {
 				this.errors = []
 
 				try {
-
 					this.dependent.employeeId = this.employee.currentEmployee.employeeId
 					
 					this.$http.post('/api/dependent', this.dependent)						

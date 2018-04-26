@@ -79,10 +79,7 @@ export default {
   		})
   	},
 	methods: {
-		...mapActions(['setCurrentEmployee']),
-		toggleModal: function() {
-			alert('toggled')
-		},
+		...mapActions(['setCurrentEmployee']),		
 		addNewDependent: function(employee) {
 			//add current employee to state management
 			this.selectedEmployee = employee
@@ -97,10 +94,10 @@ export default {
 				employee: selectedEmployee
 			}, 
 			{
-			draggable: true,
-			height: 500
+				draggable: true,
+				height: 500
 			},			
-		)}
+		)},		
 	},
 
 	created() {		
@@ -112,7 +109,7 @@ export default {
 			})
 		} catch (error) {	
 			console.log(error)
-		}
+		}		
 	}
 }
 </script>
